@@ -1,0 +1,89 @@
+
+
+.count{
+  display: flex;
+  flex-direction: column;
+
+  //background-color: #313245;
+  width: 300px;
+  height: 100%;
+  margin: 10px auto;
+  color: #313245;
+  padding: 20px;
+  border: 4px solid #313245;
+  border-radius: 8px;
+  &__title{
+    border: 4px solid #313245;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+}
+
+
+.inc{
+  background-color: #313245;
+  color: white;
+  border: none;
+  font-size: 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 2px 2px 1px #205061;
+}
+.inc:hover {
+  background-color: #313245;
+  opacity: 0.8;
+}
+.inc:active{
+  box-shadow: none;
+}
+.reset{
+  background-color:#313245;
+  color: white;
+  border: none;
+  font-size: 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 2px 2px 1px #205061;
+}
+.reset:hover {
+  background-color: #313245;
+  color: white;
+  opacity: 0.8;
+}
+.reset:active{
+  box-shadow: none;
+}
+
+
+
+h2{
+  color:#313245;
+  text-align: center;
+  letter-spacing: 1.3px ;
+}
+.count__btn {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 5px;
+  //border: 4px solid #93d8fb;
+  border: 4px solid #313245;
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+.disabled {
+  background-color: #313245;
+  color: white;
+  opacity: 0.4;
+  box-shadow: none;
+  &:hover{
+    opacity: 0.4;
+  }
+}
+.redBred {
+  color: red;
+  font-size: 35px;
+}
+.whiteBred {
+  color:#313245;
+  font-size: 35px;
+}
