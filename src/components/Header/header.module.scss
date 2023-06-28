@@ -1,0 +1,42 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to right, rgb(239, 187, 253), #a4b4ff);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  align-items: center;
+  transition-duration: 0.5s;
+
+  &:hover {
+    height: 120px;
+    transition-duration: 0.4s;
+    background: linear-gradient(to left, rgb(239, 187, 253), #a4b4ff);
+  }
+  &__buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+
+  &__button {
+    background-color: #313245;
+    color: white;
+    border: none;
+    font-size: 30px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 2px 2px 1px #205061;
+    cursor: pointer;
+    &:hover {
+      background-color: #313245;
+      opacity: 0.9;
+    }
+    &:active {
+      box-shadow: none;
+    }
+  }
+}

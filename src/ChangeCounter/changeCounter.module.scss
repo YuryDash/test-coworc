@@ -1,0 +1,17 @@
+button {
+  background-color: #313245;
+  color: white;
+  border: none;
+  font-size: 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 2px 2px 1px #205061;
+  cursor: pointer;
+  &:hover {
+    background-color: #313245;
+    opacity: 0.9;
+  }
+  &:active {
+    box-shadow: none;
+  }
+}
