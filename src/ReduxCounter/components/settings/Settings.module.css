@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.input {
+  border: 2px solid limegreen;
+  width: 300px;
+  padding: 30px;
+  margin: 10px;
+}
+
+.counter__error {
+  color: red;
+  border: 2px solid red;
+  padding: 5px;
+}
+
+.counter__number {
+  font-size: 30px;
+}

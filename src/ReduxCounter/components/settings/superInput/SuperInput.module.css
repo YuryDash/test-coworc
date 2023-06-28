@@ -1,0 +1,10 @@
+
+input {
+    width: 100%;
+    outline: none;
+    background-color: black;
+    color: limegreen;
+    font-size: 25px;
+    border: 2px solid limegreen;
+    text-align: center;
+}

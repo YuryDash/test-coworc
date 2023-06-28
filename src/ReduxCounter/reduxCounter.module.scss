@@ -1,0 +1,20 @@
+.wrapper {
+  margin: 0 auto;
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-image: url("https://farm4.staticflickr.com/3549/3437339578_ff1be38756_o_d.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.reduxCounter {
+  text-align: center;
+  border: 2px solid lawngreen;
+  padding: 0px 50px;
+  margin: 130px auto 20px;
+  color: lawngreen;
+  font-family: "Goldman", cursive;
+  letter-spacing: 4px;
+}

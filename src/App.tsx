@@ -3,6 +3,8 @@ import { Header } from "./components/Header/Header";
 import SimpleCounter from "./SimpleCounter/SimpleCounter";
 import { ReduxCounter } from "./ReduxCounter/ReduxCounter";
 import { ChangeCounter } from "./ChangeCounter/ChangeCounter";
+import { Provider } from "react-redux";
+import { reduxCounterStore } from "./ReduxCounter/redux/ReduxStoreCounter";
 
 function App() {
   return (
@@ -11,7 +13,15 @@ function App() {
       <Routes>
         <Route path="/" element={<ChangeCounter />} />
         <Route path="/simple-counter" element={<SimpleCounter />} />
-        <Route path="/redux-counter" element={<ReduxCounter />} />
+
+        <Route
+          path="/redux-counter"
+          element={
+            <Provider store={reduxCounterStore}>
+              <ReduxCounter />
+            </Provider>
+          }
+        />
       </Routes>
     </>
   );
