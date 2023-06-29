@@ -1,56 +1,61 @@
 import s from "./Counter.module.css";
 import { SuperButton } from "../btn/SuperButton";
 import { useDispatch, useSelector } from "react-redux";
-// import {RootStateType} from "../../redux/store";
-// import {comparisonMaxCeilingAC, CounterStateType, incrementAC, resetCounterAC} from "../../reducers/counterReducer";
+import {
+  CounterStateType,
+  incrementAC,
+  resetValueAC,
+  setAccessAC,
+  setErrorAC,
+} from "../../redux/reducers/reduxCounterReducer";
+import { AppRCStateType } from "../../redux/ReduxStoreCounter";
 
 export const CounterR = () => {
-  // const counterNumber = useSelector<RootStateType, CounterStateType>( state => state.countReValue )
-  // const maxValueForComparison = useSelector<RootStateType, number>( state => state.maxReValue.numberValueMax )
-  // const minValueForReset = useSelector<RootStateType, number>( state => state.minReValue.numberValueMin )
+  const counterNumber = useSelector<AppRCStateType, CounterStateType>((state) => state.countReValue);
+  const minValue = useSelector<AppRCStateType, number>((state) => state.maxMinReValue.numberValueMin);
+  const maxValue = useSelector<AppRCStateType, number>((state) => state.maxMinReValue.numberValueMax);
+  const comparisonCounterValue = useSelector<AppRCStateType, number>((state) => state.countReValue.counterValue);
+  const errorValue = useSelector<AppRCStateType, string>((state) => state.countReValue.errorText);
   const dispatch = useDispatch();
   const incHandle = () => {
-    // dispatch(incrementAC())
-    // dispatch(comparisonMaxCeilingAC(maxValueForComparison, counterNumber.countNumber))
+    debugger;
+    if (maxValue > comparisonCounterValue) {
+      dispatch(incrementAC());
+    } else {
+      dispatch(setErrorAC(`Count value:${maxValue} = max value: ${maxValue}`));
+    }
   };
   const resetHandle = () => {
-    // dispatch(resetCounterAC(minValueForReset))
+    dispatch(resetValueAC(minValue, maxValue));
+    dispatch(setAccessAC(false));
   };
-  let lol = {
+  let varOne = {
     fontSize: "25px",
     color: "red",
     border: "2px solid red",
     padding: "5px",
     margin: "20px",
   };
-
-  let lal = {
+  let varTwo = {
     fontSize: "55px",
     backgroundColor: "black",
   };
-  let counterNumber = {
-    countNumber: 1,
-    countTextError: 1,
-  };
-  let maxValueForComparison = 1;
-  let minValueForReset = 0;
 
-  let countTextError = "lol";
   return (
     <div className={s.wrapper}>
       <h3>This is Counter</h3>
       <div className={s.counter}>
-        <div style={counterNumber.countTextError ? lol : lal}>
-          {counterNumber.countTextError ? counterNumber.countTextError : counterNumber.countNumber}
+        <div style={counterNumber.errorText ? varOne : varTwo}>
+          {counterNumber.errorText ? counterNumber.errorText : counterNumber.counterValue}
         </div>
         <div className={s.counter__buttons}>
-          {counterNumber.countNumber !== maxValueForComparison ? (
+          {!counterNumber.errorText ? (
             <SuperButton enabled={true} callback={incHandle} btnText={"increment"} />
           ) : (
             <SuperButton enabled={false} callback={() => {}} btnText={"increment"} />
           )}
 
-          {counterNumber.countNumber === minValueForReset ? (
+          {!counterNumber.errorText ? (
             <SuperButton callback={resetHandle} btnText={"reset"} enabled={false} />
           ) : (
             <SuperButton callback={resetHandle} btnText={"reset"} enabled={true} />

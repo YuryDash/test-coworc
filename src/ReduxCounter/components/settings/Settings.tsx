@@ -1,57 +1,49 @@
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppRCStateType } from "../../redux/ReduxStoreCounter";
+import { addNumberValueAC } from "../../redux/reducers/reduxCounterReducer";
+import { SuperButton } from "../btn/SuperButton";
 import s from "./Settings.module.css";
 import { SuperInput } from "./superInput/SuperInput";
-import { useDispatch, useSelector } from "react-redux";
-// import { RootStateType } from "../../redux/store";
-// import { addMinValueAC, comparisonMinMaxAC, MinStateType } from "../../reducers/minReducer";
-// import { addMaxValueAC, comparisonMaxMinAC, MaxStateType } from "../../reducers/maxReducer";
-import { SuperButton } from "../btn/SuperButton";
-// import { addNumberValueAC, resetErrorAC } from "../../reducers/counterReducer";
+import { addMaxValueAC, addMinValueAC } from "../../redux/reducers/maxMinReducer";
 
 export const SettingsR = () => {
   const dispatch = useDispatch();
-  //   const minValue = useSelector<RootStateType, MinStateType>((state) => state.minReValue);
-  //   const maxValue = useSelector<RootStateType, MaxStateType>((state) => state.maxReValue);
+  const minValue = useSelector<AppRCStateType, number>((state) => state.maxMinReValue.numberValueMin);
+  const maxValue = useSelector<AppRCStateType, number>((state) => state.maxMinReValue.numberValueMax);
+  const access = useSelector<AppRCStateType, boolean>((state) => state.countReValue.setAccess);
 
   const changeMaxValueHandler = (maxValueChange: number) => {
-    // dispatch(addMaxValueAC(maxValueChange));
-    // dispatch(comparisonMaxMinAC(minValue.numberValueMin));
+    dispatch(addMaxValueAC(maxValueChange));
   };
   const changeMinValueHandler = (minValueChange: number) => {
-    // dispatch(addMinValueAC(minValueChange));
-    // dispatch(comparisonMinMaxAC(maxValue.numberValueMax));
+    dispatch(addMinValueAC(minValueChange));
   };
 
   const setMinValueHandler = () => {
-    // dispatch(addNumberValueAC(minValue.numberValueMin));
-    // dispatch(resetErrorAC());
+    dispatch(addNumberValueAC(minValue, maxValue));
   };
   return (
     <div className={s.wrapper}>
-      {/* {(maxValue.textErrorMax || minValue.textErrorMin) && <div className={s.counter__error}>{"Incorrect Values"}</div>} */}
+      {/* {errorValue && <div className={s.counter__error}>{errorValue}</div>} */}
       <div className={s.input}>
         <SuperInput
           callback={changeMaxValueHandler}
           maxValue={1000}
           minValue={1}
-          //   value={maxValue.numberValueMax}
+          value={maxValue}
           title={"max value"}
-          value={0}
         />
       </div>
 
       <div className={s.input}>
-        <SuperInput
-          callback={changeMinValueHandler}
-          maxValue={999}
-          //   value={minValue.numberValueMin}
-          minValue={0}
-          title={"min value"}
-          value={0}
-        />
+        <SuperInput callback={changeMinValueHandler} maxValue={999} value={minValue} minValue={0} title={"min value"} />
       </div>
 
-      <SuperButton callback={setMinValueHandler} btnText={"SET"} enabled={true} />
+      {!access ? (
+        <SuperButton callback={setMinValueHandler} btnText={"SET"} enabled={true} />
+      ) : (
+        <SuperButton callback={() => {}} btnText={"SET"} enabled={false} />
+      )}
     </div>
   );
 };
