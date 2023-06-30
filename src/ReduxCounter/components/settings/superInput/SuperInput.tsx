@@ -11,7 +11,9 @@ type InputPropsType = {
 
 export const SuperInput: React.FC<InputPropsType> = ({ maxValue, minValue, value, title, callback }) => {
   const onChangeHandle = (e: ChangeEvent<HTMLInputElement>) => {
-    let value = +e.currentTarget.value;
+    let value = Math.trunc(+e.currentTarget.value);
+    console.log(value);
+
     if (value <= 1000 && maxValue) {
       callback(+e.currentTarget.value);
     } else {
@@ -22,7 +24,15 @@ export const SuperInput: React.FC<InputPropsType> = ({ maxValue, minValue, value
   return (
     <div className={s.wrapper}>
       <h3>{title}</h3>
-      <input type="number" value={value} max={maxValue} min={minValue} onChange={onChangeHandle} maxLength={3} />
+      <input
+        type="number"
+        value={value}
+        max={maxValue}
+        min={minValue}
+        onChange={onChangeHandle}
+        maxLength={3}
+        step="1"
+      />
     </div>
   );
 };

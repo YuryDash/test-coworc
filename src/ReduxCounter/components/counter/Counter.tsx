@@ -15,14 +15,15 @@ export const CounterR = () => {
   const minValue = useSelector<AppRCStateType, number>((state) => state.maxMinReValue.numberValueMin);
   const maxValue = useSelector<AppRCStateType, number>((state) => state.maxMinReValue.numberValueMax);
   const comparisonCounterValue = useSelector<AppRCStateType, number>((state) => state.countReValue.counterValue);
-  const errorValue = useSelector<AppRCStateType, string>((state) => state.countReValue.errorText);
+  const accessBoo = useSelector<AppRCStateType, boolean>((state) => state.countReValue.setAccess);
+  const error = useSelector<AppRCStateType, string>((state) => state.countReValue.errorText);
+
   const dispatch = useDispatch();
   const incHandle = () => {
-    debugger;
     if (maxValue > comparisonCounterValue) {
       dispatch(incrementAC());
     } else {
-      dispatch(setErrorAC(`Count value:${maxValue} = max value: ${maxValue}`));
+      dispatch(setErrorAC(`max value: ${maxValue}`));
     }
   };
   const resetHandle = () => {
@@ -43,7 +44,7 @@ export const CounterR = () => {
 
   return (
     <div className={s.wrapper}>
-      <h3>This is Counter</h3>
+      {!error ? !accessBoo ? <h4>choose a number and press set</h4> : <h4>press inc</h4> : ""}
       <div className={s.counter}>
         <div style={counterNumber.errorText ? varOne : varTwo}>
           {counterNumber.errorText ? counterNumber.errorText : counterNumber.counterValue}
@@ -56,7 +57,7 @@ export const CounterR = () => {
           )}
 
           {!counterNumber.errorText ? (
-            <SuperButton callback={resetHandle} btnText={"reset"} enabled={false} />
+            <SuperButton callback={() => {}} btnText={"reset"} enabled={false} />
           ) : (
             <SuperButton callback={resetHandle} btnText={"reset"} enabled={true} />
           )}

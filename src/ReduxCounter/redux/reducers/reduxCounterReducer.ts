@@ -41,7 +41,7 @@ export const reduxCounterReducer = (state = initialState, action: ActionType): C
 };
 
 //ActionCreators
-export const addNumberValueAC = (minCounterValue: number, maxCounterValue: number) => {
+export const setNumberValueAC = (minCounterValue: number, maxCounterValue: number) => {
   return {
     type: "SET_COUNTER_VALUE",
     payload: {
@@ -85,7 +85,7 @@ export const setAccessAC = (setBoo: boolean) => {
   } as const;
 };
 //types
-type addNumberValueAT = ReturnType<typeof addNumberValueAC>;
+type addNumberValueAT = ReturnType<typeof setNumberValueAC>;
 type incrementAT = ReturnType<typeof incrementAC>;
 export type setErrorAT = ReturnType<typeof setErrorAC>;
 type resetValueAT = ReturnType<typeof resetValueAC>;

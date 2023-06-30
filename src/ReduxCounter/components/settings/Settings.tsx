@@ -1,16 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { AppRCStateType } from "../../redux/ReduxStoreCounter";
-import { addNumberValueAC } from "../../redux/reducers/reduxCounterReducer";
+import { AppRCStateType, useAppDispatch } from "../../redux/ReduxStoreCounter";
 import { SuperButton } from "../btn/SuperButton";
 import s from "./Settings.module.css";
 import { SuperInput } from "./superInput/SuperInput";
 import { addMaxValueAC, addMinValueAC } from "../../redux/reducers/maxMinReducer";
+import { saveCounterSettings } from "../../redux/async/fetchCounterThunk";
+import { setNumberValueAC } from "../../redux/reducers/reduxCounterReducer";
 
 export const SettingsR = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const minValue = useSelector<AppRCStateType, number>((state) => state.maxMinReValue.numberValueMin);
   const maxValue = useSelector<AppRCStateType, number>((state) => state.maxMinReValue.numberValueMax);
   const access = useSelector<AppRCStateType, boolean>((state) => state.countReValue.setAccess);
+  const currentNumber = useSelector<AppRCStateType, number>((state) => state.countReValue.counterValue);
 
   const changeMaxValueHandler = (maxValueChange: number) => {
     dispatch(addMaxValueAC(maxValueChange));
@@ -20,11 +22,11 @@ export const SettingsR = () => {
   };
 
   const setMinValueHandler = () => {
-    dispatch(addNumberValueAC(minValue, maxValue));
+    dispatch(saveCounterSettings(maxValue, minValue));
+    dispatch(setNumberValueAC(minValue, maxValue));
   };
   return (
     <div className={s.wrapper}>
-      {/* {errorValue && <div className={s.counter__error}>{errorValue}</div>} */}
       <div className={s.input}>
         <SuperInput
           callback={changeMaxValueHandler}
